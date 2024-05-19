@@ -8,7 +8,7 @@ class SaucedemoTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
-    def test_login(self):
+    def test_login_success(self):
         browser = self.browser
         browser.get('https://www.saucedemo.com/')
         self.assertIn('Swag Labs', self.browser.title)
@@ -22,11 +22,10 @@ class SaucedemoTest(unittest.TestCase):
         browser = self.browser
         browser.get('https://www.saucedemo.com/')
         self.assertIn('Swag Labs', self.browser.title)
-        browser.find_element(By.NAME, 'user-name').send_keys('salahuser')
+        browser.find_element(By.NAME, 'user-name').send_keys('salahuser@ccc.com')
         browser.find_element(By.NAME, 'password').send_keys('secret_sauce')
         browser.find_element(By.ID, 'login-button').click()
-        url = browser.current_url
-        self.assertEqual(url, 'https://www.saucedemo.com/inventory.html')
+        browser.find_element(By.CSS_SELECTOR, '[data-test="error"]')
 
 if __name__ == '__main__':
     unittest.main()
